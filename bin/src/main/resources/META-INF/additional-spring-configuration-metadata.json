@@ -1,0 +1,27 @@
+{"properties": [
+  {
+    "name": "console",
+    "type": "java.lang.String",
+    "description": "A description for 'console'"
+  },
+  {
+    "name": "enabled",
+    "type": "java.lang.String",
+    "description": "A description for 'enabled'"
+  },
+  {
+    "name": "path",
+    "type": "java.lang.String",
+    "description": "A description for 'path'"
+  },
+  {
+    "name": "properties.hibernate.show_sql",
+    "type": "java.lang.String",
+    "description": "A description for 'properties.hibernate.show_sql'"
+  },
+  {
+    "name": "properties.hibernate.format_sql",
+    "type": "java.lang.String",
+    "description": "A description for 'properties.hibernate.format_sql'"
+  }
+]}
