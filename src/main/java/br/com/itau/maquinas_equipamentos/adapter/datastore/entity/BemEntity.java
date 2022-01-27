@@ -20,7 +20,8 @@ import lombok.Setter;
 @Table(name = "TBGG070_BEM")
 public class BemEntity {
 
-	@EmbeddedId private BemMaquEntityPK pk;
+	@EmbeddedId
+	private BemMaquEntityPK pk;
 
 	@Column(name = "DAT_HOR_CADT_RGTO", nullable = false)
 	private LocalDate dataDoCadastro;

@@ -33,24 +33,20 @@ public class MaquEquiController {
 	private final BuscarBemMaqu buscarBemMaqu;
 	public static final String PATH_MAQUEQUI = "bens/{id_bem}/maquinas-equipamentos";
 	public static final String ID_BEM = "id_bem";
+	public static final String ID_TIPO_BEM = "id_tipo_bem";
 
 	@PostMapping(PATH_MAQUEQUI)
 	@Transactional
-	public ResponseEntity<BemDto> incluirBem(@PathVariable (name= ID_BEM) UUID idBem, @Valid @RequestBody BemDto bemDto){
+	public ResponseEntity<BemDto> incluirBem(@PathVariable(name = ID_BEM) UUID idBem,
+			@Valid @RequestBody BemDto bemDto, EnderecoDto enderecoDto) {
 		bemDto.setIdBem(idBem.toString());
-		var bem = incluirBemMaqu.execute(bemDto);
+		var bem = incluirBemMaqu.execute(bemDto, enderecoDto);
 		log.info("MaquEqu_Salvo={}", bem.toString());
-		return ResponseEntity.status(HttpStatus.CREATED).body(BemDto.build(bemDto));
-	}
-
-	@PostMapping("/incluir/endereco")
-	@Transactional
-	public ResponseEntity<EnderecoDto> incluirEndereco(@Valid @RequestBody EnderecoDto enderecoDto) {
-		return ResponseEntity.status(HttpStatus.CREATED).body(incluirBemMaqu.execute(enderecoDto));
+		return ResponseEntity.status(HttpStatus.CREATED).body(incluirBemMaqu.execute(bem, null));
 	}
 
 	@GetMapping(PATH_MAQUEQUI)
-	public ResponseEntity<BemDto> buscarPorId(@PathVariable (name= ID_BEM) UUID idBem) throws NegocioException {
+	public ResponseEntity<BemDto> buscarPorId(@PathVariable(name = ID_BEM) UUID idBem) throws NegocioException {
 		BemDto bemDto;
 		try {
 			bemDto = buscarBemMaqu.execute(idBem.toString());
@@ -58,6 +54,6 @@ public class MaquEquiController {
 		} catch (BemNaoEncontradoException ex) {
 			throw new NegocioException("Não foi encontrado");
 		}
-		return ResponseEntity.ok(BemDto.build(bemDto));
-		}	
+		return ResponseEntity.ok(buscarBemMaqu.execute(bemDto));
 	}
+}

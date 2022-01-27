@@ -16,26 +16,27 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "TBGG076_BEM_MAQU")
-public class MaquEquiEntity{
+public class MaquEquiEntity {
 
-	@EmbeddedId private BemMaquEntityPK pk;
+	@EmbeddedId
+	private BemMaquEntityPK pk;
 
 	@Column(name = "COD_TIPO_MAQU_EQUI", nullable = false)
 	private String idTipoMaquEqui;
-	
-	//private int finalidadeDeUso;
-	
+
+	// private int finalidadeDeUso;
+
 	@Column(name = "NUM_IDEF_MAQU_EQUI", nullable = false)
 	private int numeroSequencial;
-	
+
 	@Column(name = "COD_NUM_SRIE_MAQU_EQUI", nullable = false)
 	private String numeroDeSerie;
-	
+
 	@Column(name = "NUM_NOTA_FISC_MAQU_EQUI", nullable = false)
 	private double numeroNotaFiscal;
-	//private String dataNotaFiscal;
-	
+
+	// private String dataNotaFiscal;
+
 	@Column(name = "DESC_CMPL_MAQU_EQUI", nullable = false)
 	private String descricaoCompl;
-
 }

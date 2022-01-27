@@ -6,7 +6,6 @@ import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -14,7 +13,6 @@ import lombok.Setter;
 @Embeddable
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
 @Getter
 @Setter
 public class BemMaquEntityPK implements Serializable {
@@ -25,7 +23,7 @@ public class BemMaquEntityPK implements Serializable {
 	private String idBem;
 
 	@Column(name = "COD_TIPO_BEM", nullable = false, updatable = false)
-	private final int idTipoBem = 7;
+	private int idTipoBem = 7;
 
 	@Override
 	public String toString() {

@@ -11,35 +11,32 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString
 @JsonIgnoreProperties(ignoreUnknown = true)
 @EqualsAndHashCode
 public class BemDto {
 
-	private int idTipoBem;
+	private int idTipoBem = 7;
 	private String idBem;
-	
+
 	@NotNull(message = "Não pode ser nulo")
 	private LocalDate dataDoCadastro;
-	
+
 	@NotNull(message = "Não pode ser nulo")
 	private LocalDate dataDaAlteracao;
-	
+
 	@NotNull(message = "Não pode ser nulo")
 	private String idUsuarioResponsavel;
-	
+
 	@NotNull(message = "Não pode ser nulo")
 	private char indicadorValorizacaoManual;
-	
+
 	@NotNull(message = "Não pode ser nulo")
 	private double valorAtualDoBem;
-
-	public static BemDto build(BemDto bemDto) {
-		// TODO Auto-generated method stub
-		return bemDto;
-	}
 }

@@ -9,38 +9,26 @@ import br.com.itau.maquinas_equipamentos.port.dto.EnderecoDto;
 import br.com.itau.maquinas_equipamentos.port.mapper.BemMapper;
 import br.com.itau.maquinas_equipamentos.port.mapper.MapperFactory;
 import br.com.itau.maquinas_equipamentos.port.repository.BemRepository;
-import br.com.itau.maquinas_equipamentos.port.repository.EnderecoRepository;
 
 @Named
 public class IncluirBemMaqu {
 
 	private final BemRepository bemRepository;
-	private final EnderecoRepository enderecoRepository;
 	private final BemMapper bemMapper = MapperFactory.newInstance(BemMapper.class);
 
 	@Inject
-	public IncluirBemMaqu(BemRepository bemRepository, EnderecoRepository enderecoRepository) {
+	public IncluirBemMaqu(BemRepository bemRepository) {
 		this.bemRepository = bemRepository;
-		this.enderecoRepository = enderecoRepository;
 	}
 	
-	public BemDto execute(BemDto bemDto) {
-		if (bemDto == null)
+	public BemDto execute(BemDto bemDto, EnderecoDto enderecoDto) {
+		if (bemDto == null && enderecoDto == null)
 			throw new NegocioException("O bem DTO não pode ser nulo");
 
-		var bem = bemMapper.fromBemDto(bemDto);
-		var bemSalvo = bemRepository.incluir(bem);
+		var bem = bemMapper.fromBemDto(bemDto, enderecoDto);
+		var endereco = bemMapper.fromBemDto(bemDto, enderecoDto);
+		var bemSalvo = bemRepository.incluir(bem, endereco);
 		var bemSalvoDto = bemMapper.toBemDto(bemSalvo);
 		return bemSalvoDto;
-	}
-
-	public EnderecoDto execute(EnderecoDto enderecoDto) {
-		if (enderecoDto == null)
-			throw new NegocioException("O endereço DTO não pode ser nulo");
-
-		var endereco = bemMapper.fromEnderecoDto(enderecoDto);
-		var enderecoSalvo = enderecoRepository.incluir(endereco);
-		var enderecoSalvoDto = bemMapper.toEnderecoDto(enderecoSalvo);
-		return enderecoSalvoDto;
 	}
 }

@@ -23,12 +23,17 @@ public class BuscarBemMaqu {
 	}
 
 	public BemDto execute(String idBem) {
-		log.info("Buscando_MaquEqui_Por_ID=IdTipoBem={},idBem={}", idBem);
+		log.info("Buscando_MaquEqui_Por_ID=idBem={}", idBem);
 		var bemOptional = bemRepository.consultarPorId(idBem);
 		if (bemOptional.isEmpty()) {
-			log.info("MaquEqui_Nao_Encontrada=IdTipoBem={},idBem={}", idBem);
+			log.info("MaquEqui_Nao_Encontrada=idBem={}", idBem);
 			throw new BemNaoEncontradoException(idBem);
 		}
 		return bemMapper.toBemDto(bemOptional.get());
+	}
+
+	public BemDto execute(BemDto bemDto) {
+		// TODO Auto-generated method stub
+		return bemDto;
 	}
 }

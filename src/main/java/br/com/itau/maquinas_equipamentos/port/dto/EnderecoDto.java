@@ -17,9 +17,6 @@ import lombok.Setter;
 @JsonIgnoreProperties(ignoreUnknown = true)
 @EqualsAndHashCode
 public class EnderecoDto {
-
-	private String idBem;
-	private int idTipoBem;
 	
 	private String cep;
 	
