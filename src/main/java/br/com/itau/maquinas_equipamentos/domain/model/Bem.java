@@ -12,9 +12,9 @@ import lombok.NoArgsConstructor;
 public class Bem {
 
 	public Bem(String idBem, int idTipoBem, String idUsuarioResponsavel, LocalDate dataDoCadastro,
-			LocalDate dataDaAlteracao, char indicadorValorizacaoManual, double valorAtualDoBem, String cep,
-			String complemento, String logradouro) {
-		if (!this.validaUUIDs(idBem)) throw new NegocioException ("Id bem inválido");
+			LocalDate dataDaAlteracao, char indicadorValorizacaoManual, double valorAtualDoBem) {
+		if (!this.validaUUIDs(idBem))
+			throw new NegocioException("Id bem inválido");
 		this.idBem = idBem;
 		this.idTipoBem = idTipoBem;
 		this.idUsuarioResponsavel = idUsuarioResponsavel;
@@ -23,7 +23,6 @@ public class Bem {
 		this.indicadorValorizacaoManual = indicadorValorizacaoManual;
 		this.valorAtualDoBem = valorAtualDoBem;
 	}
-
 
 	private int idTipoBem;
 	private String idBem;
@@ -34,7 +33,7 @@ public class Bem {
 	private char indicadorValorizacaoManual;
 	private double valorAtualDoBem;
 
-	private boolean validaUUIDs (String uuid) {
+	private boolean validaUUIDs(String uuid) {
 		try {
 			UUID.fromString(uuid);
 			return true;

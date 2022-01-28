@@ -19,17 +19,17 @@ import lombok.Setter;
 public class PessoaDto {
 
 	private String idContratoPessoa;
-	
+
 	@NotNull(message = "Não pode ser nulo")
 	private int idTipoRelacionamentoGarantiaPessoa;
 
 	private double cpfOuCnpj;
-	
+
 	private String nome;
-	
+
 	private String email;
-	
+
 	private int dddTelefone;
-	
+
 	private double telefone;
 }

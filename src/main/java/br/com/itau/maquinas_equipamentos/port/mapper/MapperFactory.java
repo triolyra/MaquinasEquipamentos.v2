@@ -6,8 +6,8 @@ public class MapperFactory {
 
 	private MapperFactory() {
 	}
-	
-	public static <T> T newInstance(final Class <T> clazz){
+
+	public static <T> T newInstance(final Class<T> clazz) {
 		return Mappers.getMapper(clazz);
 	}
 }

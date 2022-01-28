@@ -17,12 +17,12 @@ import lombok.Setter;
 @JsonIgnoreProperties(ignoreUnknown = true)
 @EqualsAndHashCode
 public class EnderecoDto {
-	
+
 	private String cep;
-	
+
 	@NotNull(message = "Não pode ser nulo")
 	private String logradouro;
-	
+
 	private String complemento;
-	
+
 }

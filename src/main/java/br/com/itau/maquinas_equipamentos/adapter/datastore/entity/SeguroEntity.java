@@ -20,8 +20,9 @@ import lombok.Setter;
 @Table(name = "TBGG087_SEGU_BEM")
 public class SeguroEntity {
 
-	@EmbeddedId private BemMaquEntityPK pk;
-	
+	@EmbeddedId
+	private BemMaquEntityPK pk;
+
 	@Column(name = "NOM_SEGA")
 	private String nomeSeguradora;
 

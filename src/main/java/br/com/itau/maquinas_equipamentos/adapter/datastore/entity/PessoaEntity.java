@@ -17,8 +17,9 @@ import lombok.Setter;
 @NoArgsConstructor
 @Table(name = "TBGG081_CTTO_PESS")
 public class PessoaEntity {
-	
-	@EmbeddedId private PessoaResponsavelEntityPK pk;
+
+	@EmbeddedId
+	private PessoaResponsavelEntityPK pk;
 
 	@Column(name = "COD_TIPO_RLMT_GARA_PESS", nullable = false)
 	private int idTipoRelacionamentoGarantiaPessoa;
@@ -46,5 +47,4 @@ public class PessoaEntity {
 
 	@Column(name = "NUM_TEL_CTTO_PESS")
 	private double telefone;
-
 }

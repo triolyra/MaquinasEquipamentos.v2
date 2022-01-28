@@ -19,5 +19,4 @@ public class Seguro {
 	private LocalDate dataInicioApolice;
 	private LocalDate dataFimApolice;
 	private LocalDate dataRenovacaoApolice;
-	
 }

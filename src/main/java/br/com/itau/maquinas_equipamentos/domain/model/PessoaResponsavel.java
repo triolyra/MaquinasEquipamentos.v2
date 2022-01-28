@@ -10,5 +10,4 @@ public class PessoaResponsavel {
 	private String idBem;
 	private int idTipoBem;
 	private String idContratoPessoa;
-
 }

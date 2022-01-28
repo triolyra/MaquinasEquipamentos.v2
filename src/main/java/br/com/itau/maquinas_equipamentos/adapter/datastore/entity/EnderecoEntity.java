@@ -18,8 +18,9 @@ import lombok.Setter;
 @Table(name = "TBGG082_ENDE_BEM")
 public class EnderecoEntity {
 
-	@EmbeddedId private BemMaquEntityPK pk;
-	
+	@EmbeddedId
+	private BemMaquEntityPK pk;
+
 	@Column(name = "ID_CEP_LOGR_BEM")
 	private String cep;
 
@@ -28,5 +29,4 @@ public class EnderecoEntity {
 
 	@Column(name = "DESC_CMPL_BEM")
 	private String complemento;
-
 }

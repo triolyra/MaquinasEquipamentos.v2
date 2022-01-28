@@ -5,7 +5,6 @@ import javax.inject.Named;
 
 import br.com.itau.maquinas_equipamentos.domain.exception.NegocioException;
 import br.com.itau.maquinas_equipamentos.port.dto.BemDto;
-import br.com.itau.maquinas_equipamentos.port.dto.EnderecoDto;
 import br.com.itau.maquinas_equipamentos.port.mapper.BemMapper;
 import br.com.itau.maquinas_equipamentos.port.mapper.MapperFactory;
 import br.com.itau.maquinas_equipamentos.port.repository.BemRepository;
@@ -20,14 +19,13 @@ public class IncluirBemMaqu {
 	public IncluirBemMaqu(BemRepository bemRepository) {
 		this.bemRepository = bemRepository;
 	}
-	
-	public BemDto execute(BemDto bemDto, EnderecoDto enderecoDto) {
-		if (bemDto == null && enderecoDto == null)
+
+	public BemDto execute(BemDto bemDto) {
+		if (bemDto == null)
 			throw new NegocioException("O bem DTO não pode ser nulo");
 
-		var bem = bemMapper.fromBemDto(bemDto, enderecoDto);
-		var endereco = bemMapper.fromBemDto(bemDto, enderecoDto);
-		var bemSalvo = bemRepository.incluir(bem, endereco);
+		var bem = bemMapper.fromBemDto(bemDto);
+		var bemSalvo = bemRepository.incluir(bem);
 		var bemSalvoDto = bemMapper.toBemDto(bemSalvo);
 		return bemSalvoDto;
 	}

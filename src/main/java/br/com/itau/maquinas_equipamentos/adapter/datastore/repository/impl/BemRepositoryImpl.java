@@ -6,10 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import br.com.itau.maquinas_equipamentos.adapter.datastore.repository.BemJpaRepository;
-import br.com.itau.maquinas_equipamentos.adapter.datastore.repository.EnderecoJpaRepository;
 import br.com.itau.maquinas_equipamentos.domain.exception.NegocioException;
 import br.com.itau.maquinas_equipamentos.domain.model.Bem;
-import br.com.itau.maquinas_equipamentos.domain.model.Endereco;
 import br.com.itau.maquinas_equipamentos.port.mapper.BemMapper;
 import br.com.itau.maquinas_equipamentos.port.mapper.MapperFactory;
 import br.com.itau.maquinas_equipamentos.port.repository.BemRepository;
@@ -19,19 +17,15 @@ public class BemRepositoryImpl implements BemRepository {
 
 	@Autowired
 	private BemJpaRepository bemJpaRepository;
-	
-	@Autowired
-	private EnderecoJpaRepository enderecoJpaRepository;
 
 	private final BemMapper bemMapper = MapperFactory.newInstance(BemMapper.class);
 
 	@Override
-	public Bem incluir(Bem bem, Endereco endereco) {
-		if (bem == null && endereco == null) 
+	public Bem incluir(Bem bem) {
+		if (bem == null)
 			throw new NegocioException("O bem não pode ser nulo");
 		var bemEntity = bemJpaRepository.save(bemMapper.toBemEntity(bem));
-		var enderecoEntity = enderecoJpaRepository.save(bemMapper.toEnderecoEntity(endereco));
-		return bemMapper.fromBemEntity(bemEntity, enderecoEntity);
+		return bemMapper.fromBemEntity(bemEntity);
 	}
 
 	@Override
@@ -42,8 +36,10 @@ public class BemRepositoryImpl implements BemRepository {
 
 	@Override
 	public void deletar(String idBem) {
-		// TODO Auto-generated method stub
-
+		var maquEquiPk = bemMapper.toEntityPk(idBem);
+		{
+			bemJpaRepository.deleteById(maquEquiPk);
+		}
 	}
 
 	@Override
@@ -53,18 +49,12 @@ public class BemRepositoryImpl implements BemRepository {
 		if (bemEntityOptional.isEmpty()) {
 			return Optional.empty();
 		}
-		var bem = bemMapper.fromBemEntity(bemEntityOptional.get(), null);
+		var bem = bemMapper.fromBemEntity(bemEntityOptional.get());
 		return Optional.of(bem);
 	}
 
 	@Override
 	public Long verificarSeExiste(String idBem) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Object incluir(Bem bem, Bem endereco) {
 		// TODO Auto-generated method stub
 		return null;
 	}

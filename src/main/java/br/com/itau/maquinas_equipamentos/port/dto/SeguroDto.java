@@ -24,19 +24,19 @@ public class SeguroDto {
 	private int idTipoBem;
 
 	private String nomeSeguradora;
-	
+
 	@NotNull(message = "Não pode ser nulo")
 	private double numeroCpfOuCnpjSeguradora;
-	
+
 	private double numeroApoliceSeguro;
-	
+
 	@NotNull(message = "Não pode ser nulo")
 	private char indicadorBeneficiarioSeguradora;
-	
+
 	@NotNull(message = "Não pode ser nulo")
 	private LocalDate dataInicioApolice;
-	
+
 	private LocalDate dataFimApolice;
-	
+
 	private LocalDate dataRenovacaoApolice;
 }
