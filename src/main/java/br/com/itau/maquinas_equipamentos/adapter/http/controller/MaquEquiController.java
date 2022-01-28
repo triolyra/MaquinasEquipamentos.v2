@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.itau.maquinas_equipamentos.domain.exception.BemNaoEncontradoException;
 import br.com.itau.maquinas_equipamentos.domain.exception.NegocioException;
+import br.com.itau.maquinas_equipamentos.domain.usecase.AtualizarBemMaqu;
 import br.com.itau.maquinas_equipamentos.domain.usecase.BuscarBemMaqu;
 import br.com.itau.maquinas_equipamentos.domain.usecase.DeletarBemMaqu;
 import br.com.itau.maquinas_equipamentos.domain.usecase.IncluirBemMaqu;
@@ -34,6 +36,7 @@ public class MaquEquiController {
 	private final IncluirBemMaqu incluirBemMaqu;
 	private final BuscarBemMaqu buscarBemMaqu;
 	private final DeletarBemMaqu deletarBemMaqu;
+	private final AtualizarBemMaqu atualizarBemMaqu;
 	public static final String PATH_MAQUEQUI = "bens/{id_bem}/maquinas-equipamentos";
 	public static final String ID_BEM = "id_bem";
 	public static final String ID_TIPO_BEM = "id_tipo_bem";
@@ -58,6 +61,21 @@ public class MaquEquiController {
 			throw new NegocioException("Não foi encontrado");
 		}
 		return ResponseEntity.ok(buscarBemMaqu.execute(bemDto));
+	}
+	
+	@PatchMapping(PATH_MAQUEQUI)
+	@Transactional
+	public ResponseEntity<BemDto> atualizarBem(@PathVariable(name = ID_BEM) UUID idBem, @Valid @RequestBody BemDto bemDto) throws NegocioException {
+		bemDto.setIdBem(idBem.toString());
+		BemDto maquEquiAtualizado;
+		try {
+			maquEquiAtualizado = atualizarBemMaqu.execute(bemDto);
+		} catch
+			(BemNaoEncontradoException ex) {
+				throw new NegocioException("Não foi encontrado");
+			}
+			log.info("Maquina_Equipamento_Atualizado={}", maquEquiAtualizado.toString());
+			return ResponseEntity.ok(atualizarBemMaqu.execute(bemDto));
 	}
 
 	@DeleteMapping(PATH_MAQUEQUI)

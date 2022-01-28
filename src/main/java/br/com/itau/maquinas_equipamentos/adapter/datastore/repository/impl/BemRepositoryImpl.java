@@ -30,8 +30,7 @@ public class BemRepositoryImpl implements BemRepository {
 
 	@Override
 	public Bem atualizar(Bem bem) {
-		// TODO Auto-generated method stub
-		return null;
+		return this.incluir(bem);
 	}
 
 	@Override
@@ -55,7 +54,6 @@ public class BemRepositoryImpl implements BemRepository {
 
 	@Override
 	public Long verificarSeExiste(String idBem) {
-		// TODO Auto-generated method stub
-		return null;
+		return bemJpaRepository.countByPk(bemMapper.toEntityPk(idBem));
 	}
 }

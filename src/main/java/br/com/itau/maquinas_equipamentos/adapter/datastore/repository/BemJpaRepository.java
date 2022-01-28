@@ -9,5 +9,5 @@ import br.com.itau.maquinas_equipamentos.adapter.datastore.entity.BemMaquEntityP
 public interface BemJpaRepository
 		extends JpaRepository<BemEntity, BemMaquEntityPK>, JpaSpecificationExecutor<BemEntity> {
 
-	Long findByPk(BemMaquEntityPK pk);
+	Long countByPk(BemMaquEntityPK pk);
 }
