@@ -7,18 +7,19 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class MaquEqui {
 
-	public MaquEqui(String idBem, String idTipoBem, String idTipoMaquEqui, String numeroDeSerie,
-			double numeroNotaFiscal, String descricaoCompl) {
+	public MaquEqui(String idBem, int idTipoBem, String idTipoMaquEqui, String descricaoCompl,
+			String numeroDeSerie, double numeroNotaFiscal, int numeroSequencial) {
 		this.idBem = idBem;
 		this.idTipoBem = idTipoBem;
 		this.idTipoMaquEqui = idTipoMaquEqui;
+		this.descricaoCompl = descricaoCompl;
 		this.numeroDeSerie = numeroDeSerie;
 		this.numeroNotaFiscal = numeroNotaFiscal;
-		this.descricaoCompl = descricaoCompl;
+		this.numeroSequencial = numeroSequencial;
 	}
 
 	private String idBem;
-	private String idTipoBem;
+	private int idTipoBem;
 	private String idTipoMaquEqui;
 	private int numeroSequencial;
 	private String numeroDeSerie;

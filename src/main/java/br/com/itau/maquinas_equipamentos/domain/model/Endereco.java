@@ -7,6 +7,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class Endereco {
 
+	public Endereco(String idBem, int idTipoBem, String cep, String logradouro, String complemento) {
+	}
+	
 	private String idBem;
 	private int idTipoBem;
 
