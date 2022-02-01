@@ -7,8 +7,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class Pessoa {
 
-	private String idContratoPessoa; // pk
-	private int idTipoRelacionamentoGarantiaPessoa; // sempre vai ser 10, terceiro garantidor
+	private String idContratoPessoa;
+	private int idTipoRelacionamentoGarantiaPessoa = 10;
 
 	private double cpfOuCnpj;
 	private String nome;

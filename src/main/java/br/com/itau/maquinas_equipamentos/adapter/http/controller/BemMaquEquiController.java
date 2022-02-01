@@ -17,12 +17,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.itau.maquinas_equipamentos.domain.exception.BemNaoEncontradoException;
+import br.com.itau.maquinas_equipamentos.domain.exception.BemMaquEquiNaoEncontradoException;
 import br.com.itau.maquinas_equipamentos.domain.exception.NegocioException;
-import br.com.itau.maquinas_equipamentos.domain.usecase.AtualizarBemMaqu;
-import br.com.itau.maquinas_equipamentos.domain.usecase.BuscarBemMaqu;
-import br.com.itau.maquinas_equipamentos.domain.usecase.DeletarBemMaqu;
-import br.com.itau.maquinas_equipamentos.domain.usecase.IncluirBemMaqu;
+import br.com.itau.maquinas_equipamentos.domain.usecase.AtualizarBemMaquEqui;
+import br.com.itau.maquinas_equipamentos.domain.usecase.BuscarBemMaquEqui;
+import br.com.itau.maquinas_equipamentos.domain.usecase.DeletarBemMaquEqui;
+import br.com.itau.maquinas_equipamentos.domain.usecase.IncluirBemMaquEqui;
 import br.com.itau.maquinas_equipamentos.port.dto.BemDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -31,12 +31,12 @@ import lombok.extern.slf4j.Slf4j;
 @RestController
 @RequestMapping("/garantias")
 @RequiredArgsConstructor
-public class MaquEquiController {
+public class BemMaquEquiController {
 
-	private final IncluirBemMaqu incluirBemMaqu;
-	private final BuscarBemMaqu buscarBemMaqu;
-	private final DeletarBemMaqu deletarBemMaqu;
-	private final AtualizarBemMaqu atualizarBemMaqu;
+	private final IncluirBemMaquEqui incluirBemMaquEqui;
+	private final BuscarBemMaquEqui buscarBemMaquEqui;
+	private final DeletarBemMaquEqui deletarBemMaquEqui;
+	private final AtualizarBemMaquEqui atualizarBemMaquEqui;
 	public static final String PATH_MAQUEQUI = "bens/{id_bem}/maquinas-equipamentos";
 	public static final String ID_BEM = "id_bem";
 	public static final String ID_TIPO_BEM = "id_tipo_bem";
@@ -46,45 +46,45 @@ public class MaquEquiController {
 	public ResponseEntity<BemDto> incluirBem(@PathVariable(name = ID_BEM) UUID idBem,
 			@Valid @RequestBody BemDto bemDto) {
 		bemDto.setIdBem(idBem.toString());
-		var bem = incluirBemMaqu.execute(bemDto);
+		var bem = incluirBemMaquEqui.execute(bemDto);
 		log.info("MaquEqu_Salvo={}", bem.toString());
-		return ResponseEntity.status(HttpStatus.CREATED).body(incluirBemMaqu.execute(bem));
+		return ResponseEntity.status(HttpStatus.CREATED).body(incluirBemMaquEqui.execute(bem));
 	}
 
 	@GetMapping(PATH_MAQUEQUI)
 	public ResponseEntity<BemDto> buscarPorId(@PathVariable(name = ID_BEM) UUID idBem) throws NegocioException {
 		BemDto bemDto;
 		try {
-			bemDto = buscarBemMaqu.execute(idBem.toString());
+			bemDto = buscarBemMaquEqui.execute(idBem.toString());
 			log.info("MaquEqui_Retornado={}", bemDto.toString());
-		} catch (BemNaoEncontradoException ex) {
+		} catch (BemMaquEquiNaoEncontradoException ex) {
 			throw new NegocioException("Não foi encontrado");
 		}
-		return ResponseEntity.ok(buscarBemMaqu.execute(bemDto));
+		return ResponseEntity.ok(buscarBemMaquEqui.execute(bemDto));
 	}
-	
+
 	@PatchMapping(PATH_MAQUEQUI)
 	@Transactional
-	public ResponseEntity<BemDto> atualizarBem(@PathVariable(name = ID_BEM) UUID idBem, @Valid @RequestBody BemDto bemDto) throws NegocioException {
+	public ResponseEntity<BemDto> atualizarBem(@PathVariable(name = ID_BEM) UUID idBem,
+			@Valid @RequestBody BemDto bemDto) throws NegocioException {
 		bemDto.setIdBem(idBem.toString());
 		BemDto maquEquiAtualizado;
 		try {
-			maquEquiAtualizado = atualizarBemMaqu.execute(bemDto);
-		} catch
-			(BemNaoEncontradoException ex) {
-				throw new NegocioException("Não foi encontrado");
-			}
-			log.info("Maquina_Equipamento_Atualizado={}", maquEquiAtualizado.toString());
-			return ResponseEntity.ok(atualizarBemMaqu.execute(bemDto));
+			maquEquiAtualizado = atualizarBemMaquEqui.execute(bemDto);
+		} catch (BemMaquEquiNaoEncontradoException ex) {
+			throw new NegocioException("Não foi encontrado");
+		}
+		log.info("Maquina_Equipamento_Atualizado={}", maquEquiAtualizado.toString());
+		return ResponseEntity.ok(atualizarBemMaquEqui.execute(bemDto));
 	}
 
 	@DeleteMapping(PATH_MAQUEQUI)
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void deletarBem(@PathVariable(name = ID_BEM) UUID idBem) throws NegocioException {
 		try {
-			deletarBemMaqu.execute(idBem.toString());
-		} catch (BemNaoEncontradoException ex) {
+			deletarBemMaquEqui.execute(idBem.toString());
+		} catch (BemMaquEquiNaoEncontradoException ex) {
 			throw new NegocioException("Não foi encontrado");
+		}
 	}
-}
 }

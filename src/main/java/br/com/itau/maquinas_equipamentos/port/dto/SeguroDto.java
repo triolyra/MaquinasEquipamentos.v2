@@ -20,8 +20,8 @@ import lombok.Setter;
 @EqualsAndHashCode
 public class SeguroDto {
 
+	private int idTipoBem = 7;
 	private String idBem;
-	private int idTipoBem;
 
 	private String nomeSeguradora;
 

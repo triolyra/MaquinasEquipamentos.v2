@@ -7,8 +7,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class Endereco {
 
-	private String idBem; // pk (chave estrangeira que extende de bem)
-	private int idTipoBem; // fk
+	private String idBem;
+	private int idTipoBem;
 
 	private String cep;
 	private String logradouro;

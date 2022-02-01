@@ -18,6 +18,9 @@ import lombok.Setter;
 @EqualsAndHashCode
 public class EnderecoDto {
 
+	private int idTipoBem = 7;
+	private String idBem;
+
 	private String cep;
 
 	@NotNull(message = "Não pode ser nulo")

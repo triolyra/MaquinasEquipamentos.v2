@@ -18,6 +18,8 @@ import lombok.Setter;
 @EqualsAndHashCode
 public class PessoaDto {
 
+	private int idTipoBem = 7;
+	private String idBem;
 	private String idContratoPessoa;
 
 	@NotNull(message = "Não pode ser nulo")

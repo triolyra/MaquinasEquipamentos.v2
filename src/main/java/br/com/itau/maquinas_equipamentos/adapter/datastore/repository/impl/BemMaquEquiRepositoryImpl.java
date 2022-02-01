@@ -8,24 +8,24 @@ import org.springframework.stereotype.Repository;
 import br.com.itau.maquinas_equipamentos.adapter.datastore.repository.BemJpaRepository;
 import br.com.itau.maquinas_equipamentos.domain.exception.NegocioException;
 import br.com.itau.maquinas_equipamentos.domain.model.Bem;
-import br.com.itau.maquinas_equipamentos.port.mapper.BemMapper;
+import br.com.itau.maquinas_equipamentos.port.mapper.BemMaquEquiMapper;
 import br.com.itau.maquinas_equipamentos.port.mapper.MapperFactory;
-import br.com.itau.maquinas_equipamentos.port.repository.BemRepository;
+import br.com.itau.maquinas_equipamentos.port.repository.BemMaquEquiRepository;
 
 @Repository
-public class BemRepositoryImpl implements BemRepository {
+public class BemMaquEquiRepositoryImpl implements BemMaquEquiRepository {
 
 	@Autowired
 	private BemJpaRepository bemJpaRepository;
 
-	private final BemMapper bemMapper = MapperFactory.newInstance(BemMapper.class);
+	private final BemMaquEquiMapper bemMaquEquiMapper = MapperFactory.newInstance(BemMaquEquiMapper.class);
 
 	@Override
 	public Bem incluir(Bem bem) {
 		if (bem == null)
 			throw new NegocioException("O bem não pode ser nulo");
-		var bemEntity = bemJpaRepository.save(bemMapper.toBemEntity(bem));
-		return bemMapper.fromBemEntity(bemEntity);
+		var bemEntity = bemJpaRepository.save(bemMaquEquiMapper.toBemEntity(bem));
+		return bemMaquEquiMapper.fromBemEntity(bemEntity);
 	}
 
 	@Override
@@ -35,7 +35,7 @@ public class BemRepositoryImpl implements BemRepository {
 
 	@Override
 	public void deletar(String idBem) {
-		var maquEquiPk = bemMapper.toEntityPk(idBem);
+		var maquEquiPk = bemMaquEquiMapper.toEntityPk(idBem);
 		{
 			bemJpaRepository.deleteById(maquEquiPk);
 		}
@@ -43,17 +43,17 @@ public class BemRepositoryImpl implements BemRepository {
 
 	@Override
 	public Optional<Bem> consultarPorId(String idBem) {
-		var bemPk = bemMapper.toEntityPk(idBem);
+		var bemPk = bemMaquEquiMapper.toEntityPk(idBem);
 		var bemEntityOptional = bemJpaRepository.findById(bemPk);
 		if (bemEntityOptional.isEmpty()) {
 			return Optional.empty();
 		}
-		var bem = bemMapper.fromBemEntity(bemEntityOptional.get());
+		var bem = bemMaquEquiMapper.fromBemEntity(bemEntityOptional.get());
 		return Optional.of(bem);
 	}
 
 	@Override
 	public Long verificarSeExiste(String idBem) {
-		return bemJpaRepository.countByPk(bemMapper.toEntityPk(idBem));
+		return bemJpaRepository.countByPk(bemMaquEquiMapper.toEntityPk(idBem));
 	}
 }

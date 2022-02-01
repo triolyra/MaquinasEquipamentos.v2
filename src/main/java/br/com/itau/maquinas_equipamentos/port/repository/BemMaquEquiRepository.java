@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 import br.com.itau.maquinas_equipamentos.domain.model.Bem;
 
 @Component
-public interface BemRepository {
+public interface BemMaquEquiRepository {
 
 	Bem incluir(Bem bem);
 

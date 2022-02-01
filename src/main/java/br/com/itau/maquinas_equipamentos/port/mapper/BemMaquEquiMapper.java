@@ -9,7 +9,7 @@ import br.com.itau.maquinas_equipamentos.domain.model.Bem;
 import br.com.itau.maquinas_equipamentos.port.dto.BemDto;
 
 @Mapper
-public interface BemMapper {
+public interface BemMaquEquiMapper {
 
 	@Mapping(target = "idTipoBem", ignore = true)
 	BemMaquEntityPK toEntityPk(String idBem);

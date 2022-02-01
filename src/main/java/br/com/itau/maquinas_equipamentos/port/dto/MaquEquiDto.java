@@ -13,25 +13,22 @@ import lombok.ToString;
 @Getter
 @Setter
 @AllArgsConstructor
-@JsonIgnoreProperties(ignoreUnknown = true) // pra que serve???
-@ToString // pra que serve???
-@EqualsAndHashCode // pra que serve???
+@JsonIgnoreProperties(ignoreUnknown = true)
+@ToString
+@EqualsAndHashCode
 public class MaquEquiDto {
 
-	// private String idGarantia;
+	private int idTipoBem = 7;
 	private String idBem;
-	private String idTipoBem;
 	private String idTipoMaquEqui;
 
-	// private int finalidadeDeUso;
-	// private int numeroIdentificador;
+	private int numeroSequencial;
 
 	@NotNull(message = "Não pode ser nulo")
 	private String numeroDeSerie;
 
 	@NotNull(message = "Não pode ser nulo")
 	private double numeroNotaFiscal;
-	// private String dataNotaFiscal;
 
 	@NotNull(message = "Não pode ser nulo")
 	private String descricaoCompl;

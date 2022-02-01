@@ -9,8 +9,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class Seguro {
 
-	private String idBem; // pk (chave estrangeira que extende de bem)
-	private int idTipoBem; // pk, fk
+	private String idBem;
+	private int idTipoBem;
 
 	private String nomeSeguradora;
 	private double numeroCpfOuCnpjSeguradora;
